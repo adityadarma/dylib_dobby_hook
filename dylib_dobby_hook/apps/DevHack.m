@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Constant.h"
-#import "dobby.h"
+#import "tinyhook.h"
 #import "MemoryUtils.h"
 #import <objc/runtime.h>
 #include <mach-o/dyld.h>
@@ -256,7 +256,7 @@ static NSWindow *myWindow = nil;
 //    ];
     
         
-////    DobbyHook((void *)viewDidLoadImp, (void *)my_viewDidLoad, (void *)&viewDidLoadImp_ori);
+////    tiny_hook((void *)viewDidLoadImp, (void *)my_viewDidLoad, (void *)&viewDidLoadImp_ori);
 //    
 //    
 //    

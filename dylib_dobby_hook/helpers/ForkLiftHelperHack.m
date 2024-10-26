@@ -12,7 +12,7 @@
 #import <objc/runtime.h>
 #include <sys/ptrace.h>
 #import <CloudKit/CloudKit.h>
-#import "dobby.h"
+#import "tinyhook.h"
 #import "HackHelperProtocolDefault.h"
 
 
@@ -54,14 +54,12 @@
  
 - (BOOL)hack {
     
-    //  [self hook_AllSecCode:@"J3CP9BBBN6"];
-    // TODO: 可能是 dobby 的 bug, forklift helper 在 hook SecCodeCheckValidity 之后, 会导致出问题,
-    // 而 将 Dobbyhook 替换成 DobbyCodePatch, 则没有问题...
-    // 所以这里不用 hook_AllSecCode;    
-    teamIdentifier_ori = "J3CP9BBBN6";
-    DobbyHook(SecCodeCopySigningInformation, (void *)hk_SecCodeCopySigningInformation, (void *)&SecCodeCopySigningInformation_ori);
-    DobbyHook(SecCodeCheckValidityWithErrors, (void *)hk_SecCodeCheckValidityWithErrors, (void *)&SecCodeCheckValidityWithErrors_ori);
     
+//    teamIdentifier_ori = "J3CP9BBBN6";
+//    tiny_hook(SecCodeCopySigningInformation, (void *)hk_SecCodeCopySigningInformation, (void *)&SecCodeCopySigningInformation_ori);
+//    tiny_hook(SecCodeCheckValidityWithErrors, (void *)hk_SecCodeCheckValidityWithErrors, (void *)&SecCodeCheckValidityWithErrors_ori);
+// TODO: 可能是 dobby 的 bug, forklift helper 在 hook SecCodeCheckValidity 之后, 会导致出问题,
+    [self hook_AllSecCode:@"J3CP9BBBN6"];
 //    Class ForkLiftHelper10HelperTool = NSClassFromString(@"_TtC31com_binarynights_ForkLiftHelper10HelperTool");
 //    SEL listenerSel = NSSelectorFromString(@"listener:shouldAcceptNewConnection:");
 //    Method listenerMethod = class_getInstanceMethod(ForkLiftHelper10HelperTool, listenerSel);
